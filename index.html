@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Photo Uploader</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <h1>Upload Photo & Get Link</h1>
+    <input type="file" id="fileInput" accept="image/*" />
+    <button id="uploadBtn">Upload</button>
+
+    <div id="result" style="display:none;">
+      <p>Share this link:</p>
+      <input id="shareLink" readonly />
+      <button id="copyBtn">Copy</button>
+      <a id="openBtn" target="_blank">Open</a>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
