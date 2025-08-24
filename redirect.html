@@ -1,35 +1,24 @@
-const fileInput = document.getElementById("fileInput");
-const uploadBtn = document.getElementById("uploadBtn");
-const result = document.getElementById("result");
-const shareLink = document.getElementById("shareLink");
-const copyBtn = document.getElementById("copyBtn");
-const openBtn = document.getElementById("openBtn");
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>View Photo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <h1>Shared Photo</h1>
+    <img id="img" alt="Photo will appear here" />
+  </main>
 
-uploadBtn.addEventListener("click", async () => {
-  const file = fileInput.files[0];
-  if (!file) return alert("Please select a file!");
-
-  const formData = new FormData();
-  formData.append("file", file);
-
-  const res = await fetch("/api/upload", {
-    method: "POST",
-    body: formData,
-  });
-
-  const data = await res.json();
-  if (data.url) {
-    const link = `${window.location.origin}/redirect.html?u=${encodeURIComponent(data.url)}`;
-    shareLink.value = link;
-    openBtn.href = link;
-    result.style.display = "block";
-  } else {
-    alert("Upload failed!");
-  }
-});
-
-copyBtn.addEventListener("click", () => {
-  shareLink.select();
-  document.execCommand("copy");
-  alert("Copied!");
-});
+  <script>
+    const params = new URLSearchParams(location.search);
+    const url = params.get("u");
+    if (url) {
+      document.getElementById("img").src = decodeURIComponent(url);
+    } else {
+      document.body.innerHTML = "<p>No image provided</p>";
+    }
+  </script>
+</body>
+</html>
